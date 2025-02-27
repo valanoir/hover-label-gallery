@@ -5,15 +5,31 @@
     { "path": "./tsconfig.node.json" }
   ],
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": ".", // Kept from your config
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"] // Kept from your config, matches your alias in vite.config.ts
     },
+    "target": "ESNext", // Modern JavaScript target
+    "lib": ["DOM", "DOM.Iterable", "ESNext"], // Required for React and modern JS
+    "module": "ESNext", // Compatible with Vite's module system
+    "moduleResolution": "Node", // Node-style module resolution
+    "jsx": "react-jsx", // Added to support JSX with React (fixes '--jsx' error)
+    "esModuleInterop": true, // Better interop with CommonJS modules
+    "allowSyntheticDefaultImports": true, // Allows default imports from modules without exports
+    "isolatedModules": true, // Required for Vite's fast refresh and SSG
+    "noEmit": true, // Vite handles emission, not TSC
+    "strict": true, // Enables all strict type-checking options (can override below)
+    
+    // Kept your custom relaxed settings (overriding strict where needed)
     "noImplicitAny": false,
     "noUnusedParameters": false,
     "skipLibCheck": true,
     "allowJs": true,
     "noUnusedLocals": false,
-    "strictNullChecks": false
+    "strictNullChecks": false,
+
+    // Additional recommended options
+    "resolveJsonModule": true, // Allows importing JSON files
+    "forceConsistentCasingInFileNames": true // Prevents case-sensitivity issues
   }
 }
